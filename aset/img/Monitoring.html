@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://localhost/samsat/monitoring/index.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Monitoring</title>
+    <link href="./Monitoring_files/bootstrap.min.css" rel="stylesheet">
+    <script src="./Monitoring_files/chart.js.download"></script>
+</head>
+
+<body style="background:#eef1df;">
+    <div class="d-flex">
+        <div style="width:280px; background: linear-gradient(180deg, #e8f0d8 0%, #dce8c8 100%); min-height:100vh; display: flex; flex-direction: column; padding: 20px 0 0 0;">
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="./Monitoring_files/Logo.png" style="height:100px; width: auto; margin-bottom: -1px; margin-top: -1px;" alt="Logo">
+        <div style="font-size: 12px; font-weight: 600; color: #2d2d2d;">Admin Samsat</div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav style="flex-grow: 1; padding: 0 15px;">
+        <a href="http://localhost/samsat/beranda/index.php" style="display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: #2d2d2d; background: #fff4a3; border-radius: 8px; margin-bottom: 12px; font-weight: 500; font-size: 14px; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.08);" onmouseover="this.style.background=&#39;#ffea76&#39;; this.style.transform=&#39;translateX(4px)&#39;;" onmouseout="this.style.background=&#39;#fff4a3&#39;; this.style.transform=&#39;translateX(0)&#39;">
+            🏠 Beranda
+        </a>
+
+        <a href="http://localhost/samsat/pendataan/index.php" style="display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: #2d2d2d; background: #fff4a3; border-radius: 8px; margin-bottom: 12px; font-weight: 500; font-size: 14px; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.08);" onmouseover="this.style.background=&#39;#ffea76&#39;; this.style.transform=&#39;translateX(4px)&#39;;" onmouseout="this.style.background=&#39;#fff4a3&#39;; this.style.transform=&#39;translateX(0)&#39;">
+            🗂️ Pendataan
+        </a>
+
+        <a href="http://localhost/samsat/monitoring/index.php" style="display: flex; align-items: center; padding: 15px 20px; text-decoration: none; color: rgb(45, 45, 45); background: rgb(255, 244, 163); border-radius: 8px; margin-bottom: 12px; font-weight: 500; font-size: 14px; transition: 0.3s; box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px; transform: translateX(0px);" onmouseover="this.style.background=&#39;#ffea76&#39;; this.style.transform=&#39;translateX(4px)&#39;;" onmouseout="this.style.background=&#39;#fff4a3&#39;; this.style.transform=&#39;translateX(0)&#39;">
+            📊 Monitoring
+        </a>
+    </nav>
+
+    <!-- Logout Section -->
+    <div style="margin-top: auto; padding: 20px 15px 15px;"> <!-- logout di bawah -->
+        <a href="http://localhost/samsat/autentikasi/logout.php" style="display: flex; align-items: center; justify-content: center; padding: 10px 15px; text-decoration: none; color: #fff; background: #d84d4d; border-radius: 6px; font-size: 14px; font-weight: 500; transition: all 0.3s; box-shadow: 0 2px 6px rgba(216,77,77,0.3);" onmouseover="this.style.background=&#39;#c23c3c&#39;; this.style.boxShadow=&#39;0 4px 10px rgba(216,77,77,0.4)&#39;;" onmouseout="this.style.background=&#39;#d84d4d&#39;; this.style.boxShadow=&#39;0 2px 6px rgba(216,77,77,0.3)&#39;">
+            🚪 Keluar
+        </a>
+    </div>
+</div>
+        <div class="flex-grow-1 p-4">
+            <div class="row g-3">
+                <!-- FILTER -->
+                <div class="col-md-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5>Filter</h5>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="semua" checked="">
+                                <label class="form-check-label" for="semua">Semua</label>
+                            </div>
+                            <hr>
+
+                            <label class="form-label">Periode</label>
+                            <input type="date" id="mulai" class="form-control mb-2">
+                            <input type="date" id="sampai" class="form-control">
+
+                            <label class="form-label mt-3">Jenis Kendaraan</label>
+                            <select id="kendaraan" class="form-select">
+                                <option value="">Semua</option>
+                                <option value="R2">R2</option>
+                                <option value="R4">R4</option>
+                            </select>
+
+                            <label class="form-label mt-3">Jenis Plat</label>
+                            <select id="plat" class="form-select">
+                                <option value="">Semua</option>
+                                <option value="Merah">Merah</option>
+                                <option value="Kuning">Kuning</option>
+                                <option value="Putih">Putih</option>
+                            </select>
+
+                            <label class="form-label mt-3">Jenis Layanan</label>
+                            <select id="layanan" class="form-select">
+                                <option value="">Semua</option>
+                                <option>BBN1</option>
+                                <option>Duplikat</option>
+                                <option>Ganti Plat</option>
+                                <option>Ganti Nopol</option>
+                                <option>BBN2</option>
+                                <option>Fiskal</option>
+                                <option>Rubah</option>
+                            </select>
+
+                            <button class="btn btn-dark w-100 mt-3" id="btnLihat">Lihat</button>
+                            <button class="btn btn-secondary w-100 mt-2" id="btnCetak">Cetak PDF</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRAFIK -->
+                <div class="col-md-9">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="text-center">Laporan Monitoring</h4>
+                            <canvas id="grafikMonitoring" height="299" style="box-sizing: border-box; display: block; height: 199.5px; width: 665.2px;" width="997"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- RINGKASAN -->
+                    <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+                            <h5 class="text-center">Ringkasan Data</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Total Semua Data
+                                    <span class="badge bg-primary rounded-pill" id="totalSemua">25</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    STNK Merah
+                                    <span class="badge bg-danger rounded-pill" id="totalMerah">11</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    STNK Kuning
+                                    <span class="badge bg-warning rounded-pill" id="totalKuning">7</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    STNK Putih
+                                    <span class="badge bg-light text-dark rounded-pill" id="totalPutih">7</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg-light border-top mt-4" style="position: fixed; bottom: 0; left: 280px; width: calc(100% - 280px); z-index: 100;">
+    <div class="text-center text-muted py-2">
+        <small>© Sistem Informasi Pendataan &amp; Monitoring STNK - SAMSAT</small>
+    </div>
+</footer>
+
+<style>
+    body {
+        margin-bottom: 56px !important;
+    }
+
+    @media (max-width: 768px) {
+        footer {
+            position: static !important;
+            width: 100% !important;
+            left: 100% !important;
+        }
+    }
+</style>        </div>
+    </div>
+
+    <!-- FORM HIDDEN UNTUK KIRIM BASE64 CHART KE PDF -->
+    <form id="formCetak" method="POST" action="http://localhost/samsat/monitoring/cetak_pdf.php" target="_blank" style="display:none;">
+        <input type="hidden" name="gambar_grafik" id="gambar_grafik">
+        <input type="hidden" name="mulai" id="f_mulai">
+        <input type="hidden" name="sampai" id="f_sampai">
+        <input type="hidden" name="kendaraan" id="f_kendaraan">
+        <input type="hidden" name="plat" id="f_plat">
+        <input type="hidden" name="layanan" id="f_layanan">
+    </form>
+
+    <script>
+        let chart;
+
+        function queryFilter() {
+            const semua = document.getElementById('semua').checked;
+            const mulai = document.getElementById('mulai').value;
+            const sampai = document.getElementById('sampai').value;
+            const kendaraan = document.getElementById('kendaraan').value;
+            const plat = document.getElementById('plat').value;
+            const layanan = document.getElementById('layanan').value;
+
+            // Jika ada filter aktif, override kondisi "Semua" supaya pakai filter
+            const pakaiFilter = !semua || mulai || sampai || kendaraan || plat || layanan;
+            const q = new URLSearchParams();
+
+            if (pakaiFilter) {
+                if (mulai) q.set('mulai', mulai);
+                if (sampai) q.set('sampai', sampai);
+                if (kendaraan) q.set('kendaraan', kendaraan);
+                if (plat) q.set('plat', plat);
+                if (layanan) q.set('layanan', layanan);
+            }
+
+            return q.toString();
+        }
+
+        async function muatData() {
+            const qs = queryFilter();
+            const url = "api_data.php" + (qs ? ("?" + qs) : "");
+            const res = await fetch(url);
+            const json = await res.json();
+
+            const labels = json.labels;
+            const merah = json.merah;
+            const kuning = json.kuning;
+            const putih = json.putih;
+
+            if (chart) chart.destroy();
+            chart = new Chart(document.getElementById('grafikMonitoring'), {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                            label: 'STNK Merah',
+                            data: merah,
+                            tension: .3,
+                            borderColor: 'rgb(220,53,69)',
+                            backgroundColor: 'rgba(220,53,69,0.2)'
+                        },
+                        {
+                            label: 'STNK Kuning',
+                            data: kuning,
+                            tension: .3,
+                            borderColor: 'rgb(255,193,7)',
+                            backgroundColor: 'rgba(255,193,7,0.2)'
+                        },
+                        {
+                            label: 'STNK Putih',
+                            data: putih,
+                            tension: .3,
+                            borderColor: 'rgb(33,37,41)',
+                            backgroundColor: 'rgba(33,37,41,0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    animation: false // supaya stabil saat real-time
+                }
+            });
+
+            // Update ringkasan
+            const ringkas = json.ringkas;
+            document.getElementById('totalSemua').textContent = ringkas.total;
+            document.getElementById('totalMerah').textContent = ringkas.total_merah;
+            document.getElementById('totalKuning').textContent = ringkas.total_kuning;
+            document.getElementById('totalPutih').textContent = ringkas.total_putih;
+        }
+
+        function isiHiddenFilterUntukCetak() {
+            // kalau "Semua" dicentang, kirim kosong supaya dianggap semua
+            const semua = document.getElementById('semua').checked;
+
+            document.getElementById('f_mulai').value = semua ? "" : document.getElementById('mulai').value;
+            document.getElementById('f_sampai').value = semua ? "" : document.getElementById('sampai').value;
+            document.getElementById('f_kendaraan').value = semua ? "" : document.getElementById('kendaraan').value;
+            document.getElementById('f_plat').value = semua ? "" : document.getElementById('plat').value;
+            document.getElementById('f_layanan').value = semua ? "" : document.getElementById('layanan').value;
+        }
+
+        const filterEls = ['mulai', 'sampai', 'kendaraan', 'plat', 'layanan'];
+        filterEls.forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                document.getElementById('semua').checked = false;
+            });
+        });
+
+        document.getElementById('semua').addEventListener('change', () => {
+            if (document.getElementById('semua').checked) {
+                filterEls.forEach(id => document.getElementById(id).value = '');
+            }
+        });
+
+        document.getElementById('btnLihat').addEventListener('click', muatData);
+
+        // Cetak PDF dengan grafik (base64)
+        document.getElementById('btnCetak').addEventListener('click', () => {
+            if (!chart) {
+                alert("Grafik belum dimuat. Klik tombol Lihat dulu.");
+                return;
+            }
+            // ambil gambar dari canvas
+            const canvas = document.getElementById('grafikMonitoring');
+            const base64 = canvas.toDataURL('image/png', 1.0);
+
+            // isi field hidden
+            document.getElementById('gambar_grafik').value = base64;
+            isiHiddenFilterUntukCetak();
+
+            // submit ke cetak_pdf.php (tab baru)
+            document.getElementById('formCetak').submit();
+        });
+
+        // Real-time refresh tiap 5 detik
+        setInterval(muatData, 5000);
+
+        // load awal
+        muatData();
+    </script>
+
+
+</body></html>
